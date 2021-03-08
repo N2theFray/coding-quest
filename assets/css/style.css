@@ -1,0 +1,31 @@
+header { 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header a {
+    margin-left: 10px;
+}
+
+header p {
+    margin-right: 10px;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;  
+    margin-top: 150px;
+}
+
+.welcomeContent {
+    width: 100%;
+    text-align: center;
+}
+
+.startQuiz {
+    margin: 10px auto;
+}

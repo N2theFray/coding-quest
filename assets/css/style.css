@@ -34,3 +34,21 @@ main {
 .startQuiz {
     margin: 10px auto;
 }
+
+.choiceBtns {
+    display: flex;
+    flex-direction: column; 
+    width: 10%;
+}
+
+.answers {
+    margin: 10px 0;
+}
+
+.codeHeader {
+    width: 100%;
+    text-align: center;
+}
+#questionHolder {
+    width: 100%;
+}

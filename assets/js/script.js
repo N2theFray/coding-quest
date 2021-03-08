@@ -41,6 +41,7 @@ function startChallenge (){
     
     var removeCodeContent = document.querySelector("#codeContent");
     removeCodeContent.remove();
+
     //Start questions
     questionBuilder();
    
@@ -57,9 +58,9 @@ function questionBuilder () {
     //create div to hold questions
     var questionHolder = document.createElement("div");
     questionHolder.id = "questionHolder"
-    
-    
-    //create question H1
+    // debugger;
+    for ( var i = incrementor; i<= codeQuestions.length-1; i++)
+    {//create question H1
      var questionH1 = document.createElement("h1");
      questionH1.className = "questionGoesHere";
      questionH1.textContent = codeQuestions[incrementor];
@@ -80,6 +81,7 @@ function questionBuilder () {
          //add buttons to button holder div
          buttonHolder.appendChild(answerBtn);
          }
+    
  
      //add button div to section
      questionHolder.appendChild(buttonHolder);
@@ -88,7 +90,7 @@ function questionBuilder () {
      allContentEl.appendChild(questionHolder);
     incrementor ++;
     // debugger;
-    
+        }
     questionHolder.addEventListener("click", questionReset);
 }
 

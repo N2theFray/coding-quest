@@ -8,8 +8,8 @@ var codeQuestions = [
     "This is question 3"
 ]
 var codeAnswers = [
-    "Q1 right answer",
     "Q1 one",
+    "Q2 one",
     "Q1 two",
     "Q1 three",
     "Q2 one",
@@ -19,17 +19,19 @@ var codeAnswers = [
     "Q3 two",
     "Q3 three"
 ]
+var timeLeft = 100;
 
-// timer function
 function timeGoesOn (){
-    var timeLeft = 100;
+    // debugger;
     var downloadTimer = setInterval(function(){
     timeLeft--;
     document.getElementById("timer").textContent = timeLeft;
     if(timeLeft <= 0)
         clearInterval(downloadTimer);
     },1000);
+    
 }
+
 
 function startChallenge (){
     //remove quiz Start button and paragraph
@@ -47,6 +49,7 @@ function startChallenge (){
    
 }   
 function questionReset(){
+    
     var redButton = document.querySelector("#questionHolder")
     redButton.remove();
 
@@ -55,10 +58,11 @@ function questionReset(){
 //
 function questionBuilder () {
 
+
     //create div to hold questions
     var questionHolder = document.createElement("div");
     questionHolder.id = "questionHolder"
-    // debugger;
+    
     for ( var i = incrementor; i<= codeQuestions.length-1; i++)
     {//create question H1
      var questionH1 = document.createElement("h1");
@@ -77,6 +81,7 @@ function questionBuilder () {
          var answerBtn = document.createElement("button");
          answerBtn.className = "answers";
          answerBtn.textContent = codeAnswers[i];
+         answerBtn.setAttribute("target", i)
  
          //add buttons to button holder div
          buttonHolder.appendChild(answerBtn);
@@ -89,12 +94,28 @@ function questionBuilder () {
      //add all content to body
      allContentEl.appendChild(questionHolder);
     incrementor ++;
-    // debugger;
+    
         }
-    questionHolder.addEventListener("click", questionReset);
+        
+    questionHolder.addEventListener("click", function(event){
+        
+        var rightOrWrong = event.target;
+        
+        rightOrWrong = rightOrWrong.innerText;
+        rightOrWrong = rightOrWrong.toLowerCase();
+        if (rightOrWrong === "q1 one"){
+            alert("correct!")
+        } else { 
+            timeLeft -= 10;
+            document.getElementById("timer").textContent = timeLeft;
+        }
+        questionReset();
+    });
 }
 
-// questionHolderEL.addEventListener("click", questionBuilder);
+
 codeContentEl.addEventListener("click",timeGoesOn);
 codeContentEl.addEventListener("click", startChallenge);
-console.log(codeQuestions[0]);
+
+
+

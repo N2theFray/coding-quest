@@ -1,6 +1,8 @@
 var codeContentEl = document.querySelector("#codeContent")
 var questionHolderEL= document.querySelector("#questionHolder");
 var allContentEl = document.querySelector("#allContentHere");
+
+// var highScorePage = document.querySelector("#highScoreContent");
 var incrementor = 0
 var codeQuestions = [
     "This is question 1",
@@ -9,7 +11,6 @@ var codeQuestions = [
 ]
 var codeAnswers = [
     "Q1 one",
-    "Q2 one",
     "Q1 two",
     "Q1 three",
     "Q2 one",
@@ -17,9 +18,54 @@ var codeAnswers = [
     "Q2 three",
     "Q3 one",
     "Q3 two",
-    "Q3 three"
+    "Q3 three",
 ]
-var timeLeft = 100;
+var timeLeft = 20;
+var highScore = 0;
+
+
+
+function getHighScore () {
+    timeLeft = 0;
+    document.getElementById("timer").textContent = timeLeft;
+
+    var sectionDiv = document.createElement("div");
+    sectionDiv.id = "highScoreContent";
+
+    var sectionH1 = document.createElement("h1");
+    sectionH1.className = "highScoreHeader";
+    sectionH1.textContent = "All Done";
+    sectionDiv.appendChild(sectionH1);
+
+    var sectionP = document.createElement("p");
+    sectionP.className = "highScoreP";
+    sectionP.textContent = "Your final score is " + highScore;
+    sectionDiv.appendChild(sectionP);
+    
+    var inputP = document.createElement("p");
+    inputP.className = "inputP";
+    inputP.textContent = "Enter Initials: ";
+    sectionDiv.appendChild(inputP);
+
+    var sectionInput = document.createElement("input");
+    sectionInput.type = "text";
+    sectionInput.placeholder = "Enter Initials Here";
+    sectionDiv.appendChild(sectionInput);
+    
+    var sectionButton = document.createElement("button");
+    sectionButton.className = "initialsButton";
+    sectionButton.textContent = "Submit";
+    sectionDiv.appendChild(sectionButton);
+    
+
+    allContentEl.appendChild(sectionDiv);
+    
+    var highScoreContent = document.querySelector(".initialsButton");
+    highScoreContent.addEventListener("click", function(){
+        var taskNameInput = document.querySelector("input").value;
+        alert(taskNameInput);
+    });
+}
 
 function timeGoesOn (){
     // debugger;
@@ -31,7 +77,6 @@ function timeGoesOn (){
     },1000);
     
 }
-
 
 function startChallenge (){
     //remove quiz Start button and paragraph
@@ -48,14 +93,18 @@ function startChallenge (){
     questionBuilder();
    
 }   
+
 function questionReset(){
     
     var redButton = document.querySelector("#questionHolder")
     redButton.remove();
-
-    questionBuilder();
+    // debugger;
+    if (incrementor === codeQuestions.length || timeLeft <=1){
+            
+       getHighScore();
+    } else { questionBuilder();}
 }
-//
+
 function questionBuilder () {
 
 
@@ -63,39 +112,40 @@ function questionBuilder () {
     var questionHolder = document.createElement("div");
     questionHolder.id = "questionHolder"
     
-    for ( var i = incrementor; i<= codeQuestions.length-1; i++)
-    {//create question H1
-     var questionH1 = document.createElement("h1");
-     questionH1.className = "questionGoesHere";
-     questionH1.textContent = codeQuestions[incrementor];
+    for ( var i = incrementor; i<= codeQuestions.length-1; i++){
+        
+        //create question H1
+        var questionH1 = document.createElement("h1");
+        questionH1.className = "questionGoesHere";
+        questionH1.textContent = codeQuestions[incrementor];
 
-     questionHolder.appendChild(questionH1);
-     //div to hold buttons
-     var buttonHolder = document.createElement("div");
-     buttonHolder.className = "choiceBtns";
-     buttonHolder.id= "nextQuestion";
- 
-         // loop to add three choices
-         for (var i = 0; i <= 2; i++){ 
-             //add buttons that contain answers
-         var answerBtn = document.createElement("button");
-         answerBtn.className = "answers";
-         answerBtn.textContent = codeAnswers[i];
-         answerBtn.setAttribute("target", i)
- 
-         //add buttons to button holder div
-         buttonHolder.appendChild(answerBtn);
-         }
+        questionHolder.appendChild(questionH1);
+        //div to hold buttons
+        var buttonHolder = document.createElement("div");
+        buttonHolder.className = "choiceBtns";
+        buttonHolder.id= "nextQuestion";
     
- 
-     //add button div to section
-     questionHolder.appendChild(buttonHolder);
+            // loop to add three choices
+            for (var i = 0; i <= 2; i++){ 
+                //add buttons that contain answers
+            var answerBtn = document.createElement("button");
+            answerBtn.className = "answers";
+            answerBtn.textContent = codeAnswers[i];
+            answerBtn.setAttribute("target", i)
+    
+            //add buttons to button holder div
+            buttonHolder.appendChild(answerBtn);
+            }
+        
+    
+            //add button div to section
+            questionHolder.appendChild(buttonHolder);
 
-     //add all content to body
-     allContentEl.appendChild(questionHolder);
+            //add all content to body
+            allContentEl.appendChild(questionHolder);
+            // incrementor ++;
+    }
     incrementor ++;
-    
-        }
         
     questionHolder.addEventListener("click", function(event){
         
@@ -103,7 +153,8 @@ function questionBuilder () {
         
         rightOrWrong = rightOrWrong.innerText;
         rightOrWrong = rightOrWrong.toLowerCase();
-        if (rightOrWrong === "q1 one"){
+        if (rightOrWrong === "q1 one" || rightOrWrong === "q2 one" || rightOrWrong === "q3 one"){
+            highScore ++;
             alert("correct!")
         } else { 
             timeLeft -= 10;
@@ -111,11 +162,11 @@ function questionBuilder () {
         }
         questionReset();
     });
+    // debugger;
 }
 
 
 codeContentEl.addEventListener("click",timeGoesOn);
 codeContentEl.addEventListener("click", startChallenge);
-
-
+// highScoreContent.addEventListener("click",highScoreLanding);
 

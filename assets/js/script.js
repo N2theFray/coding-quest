@@ -2,7 +2,7 @@ var codeContentEl = document.querySelector("#codeContent")
 var questionHolderEL= document.querySelector("#questionHolder");
 var allContentEl = document.querySelector("#allContentHere");
 
-// var highScorePage = document.querySelector("#highScoreContent");
+
 var incrementor = 0
 var codeQuestions = [
     "This is question 1",
@@ -23,7 +23,50 @@ var codeAnswers = [
 var timeLeft = 20;
 var highScore = 0;
 
+function highScoreLanding () {
+    var sectionDiv = document.querySelector("#highScoreContent");
+    var nameInput = document.querySelector("input").value;
+    var sectionH1 = document.querySelector(".highScoreHeader");
+    var sectionP = document.querySelector(".highScoreP");
+    var sectionInput = document.querySelector(".inputP");
+    var sectionIntialsGoHere = document.querySelector("#initialsGoHere");
+    var sectionButton = document.querySelector(".initialsButton");
+    
+    
+    sectionH1.textContent = "High Score";
+    sectionP.textContent = nameInput + " - " + highScore;
 
+    sectionInput.remove();
+    sectionButton.remove();
+    sectionIntialsGoHere.remove();
+
+    //create go back and  to starter page button
+    var goBackButton = document.createElement("button")
+    goBackButton.classname = "navBtn";
+    goBackButton.textContent = "Go Back";
+
+    var clearButton = document.createElement("button")
+    clearButton.classname = "navBtn";
+    clearButton.textContent = "Clear High Score";
+    
+    sectionDiv.appendChild(goBackButton);
+    sectionDiv.appendChild(clearButton);
+
+    sectionDiv.addEventListener("click", function(event){
+        
+        var clearOrGoHome = event.target;
+        clearOrGoHome = clearOrGoHome.textContent;
+        clearOrGoHome = clearOrGoHome.toLowerCase();
+        
+        if (clearOrGoHome === "go back"){
+            window.location = "https://n2theFray.github.io"
+        } else if ( clearOrGoHome === "clear high score"){
+            sectionP.textContent = "0";
+        }
+
+
+    })
+}
 
 function getHighScore () {
     timeLeft = 0;
@@ -48,6 +91,7 @@ function getHighScore () {
     sectionDiv.appendChild(inputP);
 
     var sectionInput = document.createElement("input");
+    sectionInput.id = "initialsGoHere"
     sectionInput.type = "text";
     sectionInput.placeholder = "Enter Initials Here";
     sectionDiv.appendChild(sectionInput);
@@ -61,10 +105,7 @@ function getHighScore () {
     allContentEl.appendChild(sectionDiv);
     
     var highScoreContent = document.querySelector(".initialsButton");
-    highScoreContent.addEventListener("click", function(){
-        var taskNameInput = document.querySelector("input").value;
-        alert(taskNameInput);
-    });
+    highScoreContent.addEventListener("click", highScoreLanding);
 }
 
 function timeGoesOn (){

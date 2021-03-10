@@ -20,6 +20,13 @@ main {
     width: 100%;  
     margin-top: 150px;
 }
+
+button {
+    width: 15%;
+    background: darkturquoise;
+    border-radius: 10px;
+    margin-left: 10px;
+}
 .codeContent{
     width: 100%;
     display: flex;
@@ -37,8 +44,9 @@ main {
 
 .choiceBtns {
     display: flex;
-    flex-direction: column; 
-    width: 10%;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
 .answers {
@@ -51,4 +59,35 @@ main {
 }
 #questionHolder {
     width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+#highScoreContent {
+    margin: auto;
+    width: 40%;
+    text-align: inherit;
+}
+
+.navBtn {
+    margin-left: 0;
+    margin-right: 10px;
+    width: auto;
+}
+
+.highScoreP{
+    font-weight: bold;
+    font-size: larger;
+}
+
+#highScorePage {
+    margin: auto;
+    text-align: left;
+    width: 20%;
+    margin-top: 150px;
+}
+
+#highScorePage p {
+    background-color: darkgray;
+    padding-left: 10px;
 }

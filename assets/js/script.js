@@ -56,11 +56,11 @@ function highScoreLanding () {
 
     //create go back and  to starter page button
     var goBackButton = document.createElement("button")
-    goBackButton.classname = "navBtn";
+    goBackButton.className = "navBtn";
     goBackButton.textContent = "Go Back";
 
     var clearButton = document.createElement("button")
-    clearButton.classname = "navBtn";
+    clearButton.className = "navBtn";
     clearButton.textContent = "Clear High Score";
     
     sectionDiv.appendChild(goBackButton);

@@ -21,7 +21,11 @@ var codeAnswers = [
     "Q3 three",
 ]
 var timeLeft = 20;
-var highScore = 0;
+var highScore = localStorage.getItem('bestScore');
+var winnerWinner = localStorage.getItem('goat');
+var starterScore = 0;
+// debugger;
+
 
 function highScoreLanding () {
     var sectionDiv = document.querySelector("#highScoreContent");
@@ -34,7 +38,17 @@ function highScoreLanding () {
     
     
     sectionH1.textContent = "High Score";
-    sectionP.textContent = nameInput + " - " + highScore;
+
+    
+    if (starterScore >= highScore){
+        highScore = starterScore;
+        winnerWinner = nameInput;
+        alert("Congrats! New High Score!")
+        localStorage.setItem('bestScore', highScore);
+        localStorage.setItem('goat', winnerWinner);
+    };
+
+    sectionP.textContent = winnerWinner + " - " + highScore;
 
     sectionInput.remove();
     sectionButton.remove();
@@ -59,9 +73,10 @@ function highScoreLanding () {
         clearOrGoHome = clearOrGoHome.toLowerCase();
         
         if (clearOrGoHome === "go back"){
-            window.location = "https://n2theFray.github.io"
+            window.location = "https://n2theFray.github.io/coding-quest"
         } else if ( clearOrGoHome === "clear high score"){
-            sectionP.textContent = "0";
+            sectionP.textContent = "";
+            localStorage.clear();
         }
 
 
@@ -82,7 +97,7 @@ function getHighScore () {
 
     var sectionP = document.createElement("p");
     sectionP.className = "highScoreP";
-    sectionP.textContent = "Your final score is " + highScore;
+    sectionP.textContent = "Your final score is " + starterScore;
     sectionDiv.appendChild(sectionP);
     
     var inputP = document.createElement("p");
@@ -191,11 +206,11 @@ function questionBuilder () {
     questionHolder.addEventListener("click", function(event){
         
         var rightOrWrong = event.target;
-        
+        // debugger;
         rightOrWrong = rightOrWrong.innerText;
         rightOrWrong = rightOrWrong.toLowerCase();
         if (rightOrWrong === "q1 one" || rightOrWrong === "q2 one" || rightOrWrong === "q3 one"){
-            highScore ++;
+            starterScore ++;
             alert("correct!")
         } else { 
             timeLeft -= 10;
@@ -209,5 +224,4 @@ function questionBuilder () {
 
 codeContentEl.addEventListener("click",timeGoesOn);
 codeContentEl.addEventListener("click", startChallenge);
-// highScoreContent.addEventListener("click",highScoreLanding);
 

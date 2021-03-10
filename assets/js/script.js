@@ -10,7 +10,7 @@ var codeQuestions = [
     "This is question 3"
 ]
 var codeAnswers = [
-    "Q1 one",
+    "Q1 one" ,
     "Q1 two",
     "Q1 three",
     "Q2 one",

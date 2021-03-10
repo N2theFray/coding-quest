@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>High Score</title>
+</head>
+<body id="highScorePage">
+    <h1>HighScore</h1>
+    
+</body>
+<script> 
+var highScoreHolder = document.querySelector("#highScorePage");
+var winnerWinner = localStorage.getItem('goat');
+var highScore = localStorage.getItem('bestScore');
+var highScoreP = document.createElement("p");
+if (!winnerWinner || !highScore){
+    highScoreP.textContent = "Be the first! Play the game!";
+} else {
+    highScoreP.textContent = winnerWinner + " - " + highScore;};
+
+highScoreHolder.appendChild(highScoreP);
+
+</script>
+</html>

@@ -28,7 +28,7 @@ var codeAnswers = [
     "alertBox('Hello World');",
     "function = myFunction()" ,
     "function myFunction()",
-    "function:myFunction()",
+    "function: myFunction()",
     "function myFunction[]",
     "call function myFunction()" ,
     "call myFunction()",

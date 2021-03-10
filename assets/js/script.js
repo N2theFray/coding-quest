@@ -4,23 +4,39 @@ var allContentEl = document.querySelector("#allContentHere");
 
 
 var incrementor = 0
+var inkerDinker = incrementor * 4 + 3;
 var codeQuestions = [
-    "This is question 1",
-    "This is question 2",
-    "This is question 3"
+    "Inside which HTML element do we put the JavaScript?",
+    "Where is the correct place to insert a JavaScript?",
+    "How do you write 'Hello World' in an alert box?",
+    "How do you create a function in JavaScript?",
+    "How do you call a function named 'myFunction'?",
+    
 ]
 var codeAnswers = [
-    "Q1 one" ,
-    "Q1 two",
-    "Q1 three",
-    "Q2 one",
-    "Q2 two",
-    "Q2 three",
-    "Q3 one",
-    "Q3 two",
-    "Q3 three",
+    "<javascript>" ,
+    "<script>",
+    "<scripting>",
+    "<js>",
+    "The <head> section" ,
+    "The <img> section",
+    "The <div> section",
+    "The <p> section",
+    "msgBox('Hello World');" ,
+    "msg('Hello World');",
+    "alert('Hello World');",
+    "alertBox('Hello World');",
+    "function = myFunction()" ,
+    "function myFunction()",
+    "function:myFunction()",
+    "function myFunction[]",
+    "call function myFunction()" ,
+    "call myFunction()",
+    "myFunction()",
+    "myFunction(call)",
 ]
-var timeLeft = 20;
+
+var timeLeft = 100;
 var highScore = localStorage.getItem('bestScore');
 var winnerWinner = localStorage.getItem('goat');
 var starterScore = 0;
@@ -182,12 +198,13 @@ function questionBuilder () {
         buttonHolder.id= "nextQuestion";
     
             // loop to add three choices
-            for (var i = 0; i <= 2; i++){ 
+            // debugger;
+            for (var i = incrementor*4; i <= (incrementor * 4 + 3); i++){ 
                 //add buttons that contain answers
             var answerBtn = document.createElement("button");
             answerBtn.className = "answers";
             answerBtn.textContent = codeAnswers[i];
-            answerBtn.setAttribute("target", i)
+            
     
             //add buttons to button holder div
             buttonHolder.appendChild(answerBtn);
@@ -209,7 +226,12 @@ function questionBuilder () {
         // debugger;
         rightOrWrong = rightOrWrong.innerText;
         rightOrWrong = rightOrWrong.toLowerCase();
-        if (rightOrWrong === "q1 one" || rightOrWrong === "q2 one" || rightOrWrong === "q3 one"){
+        if (rightOrWrong === "<script>" || 
+            rightOrWrong === "the <head> section" || 
+            rightOrWrong === "alert('hello world');" || 
+            rightOrWrong === "function myfunction()" ||
+            rightOrWrong === "myfunction()"  
+        ){
             starterScore ++;
             alert("correct!")
         } else { 
@@ -224,4 +246,3 @@ function questionBuilder () {
 
 codeContentEl.addEventListener("click",timeGoesOn);
 codeContentEl.addEventListener("click", startChallenge);
-

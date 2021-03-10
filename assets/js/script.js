@@ -2,9 +2,10 @@ var codeContentEl = document.querySelector("#codeContent")
 var questionHolderEL= document.querySelector("#questionHolder");
 var allContentEl = document.querySelector("#allContentHere");
 
-
+// incrementor to cycle for loops
 var incrementor = 0
-var inkerDinker = incrementor * 4 + 3;
+
+//arrays to hold questions and answers
 var codeQuestions = [
     "Inside which HTML element do we put the JavaScript?",
     "Where is the correct place to insert a JavaScript?",
@@ -36,14 +37,20 @@ var codeAnswers = [
     "myFunction(call)",
 ]
 
-var timeLeft = 100;
+//initialize timer time
+var timeLeft = 60;
+
+//store and get score from local storage
 var highScore = localStorage.getItem('bestScore');
 var winnerWinner = localStorage.getItem('goat');
+
+//make score accessible globally
 var starterScore = 0;
-// debugger;
 
 
+// high score landing page to determine if is the highest score
 function highScoreLanding () {
+    //have to requery the page contents
     var sectionDiv = document.querySelector("#highScoreContent");
     var nameInput = document.querySelector("input").value;
     var sectionH1 = document.querySelector(".highScoreHeader");
@@ -55,7 +62,7 @@ function highScoreLanding () {
     
     sectionH1.textContent = "High Score";
 
-    
+    // validate highscore 
     if (starterScore >= highScore){
         highScore = starterScore;
         winnerWinner = nameInput;
@@ -88,6 +95,7 @@ function highScoreLanding () {
         clearOrGoHome = clearOrGoHome.textContent;
         clearOrGoHome = clearOrGoHome.toLowerCase();
         
+        // logic for buttons on page
         if (clearOrGoHome === "go back"){
             window.location = "https://n2theFray.github.io/coding-quest"
         } else if ( clearOrGoHome === "clear high score"){
@@ -99,6 +107,7 @@ function highScoreLanding () {
     })
 }
 
+// input page hold highscore divs and input section
 function getHighScore () {
     timeLeft = 0;
     document.getElementById("timer").textContent = timeLeft;
@@ -135,10 +144,12 @@ function getHighScore () {
 
     allContentEl.appendChild(sectionDiv);
     
+    //after initials input calls high score landing page
     var highScoreContent = document.querySelector(".initialsButton");
     highScoreContent.addEventListener("click", highScoreLanding);
 }
 
+// start timer function
 function timeGoesOn (){
     // debugger;
     var downloadTimer = setInterval(function(){
@@ -150,6 +161,7 @@ function timeGoesOn (){
     
 }
 
+//wipe original page and set up ability to call questions
 function startChallenge (){
     //remove quiz Start button and paragraph
     var removeStart = document.querySelector(".quizBtn");
@@ -166,17 +178,22 @@ function startChallenge (){
    
 }   
 
+// determine if time is out and reset memory page
 function questionReset(){
     
     var redButton = document.querySelector("#questionHolder")
     redButton.remove();
     // debugger;
     if (incrementor === codeQuestions.length || timeLeft <=1){
-            
+        // if time or questions run out jump to high score page
        getHighScore();
-    } else { questionBuilder();}
+
+    } else { 
+        questionBuilder();
+    }
 }
 
+// workhorse of script
 function questionBuilder () {
 
 
@@ -197,7 +214,7 @@ function questionBuilder () {
         buttonHolder.className = "choiceBtns";
         buttonHolder.id= "nextQuestion";
     
-            // loop to add three choices
+            // loop to add four choices
             // debugger;
             for (var i = incrementor*4; i <= (incrementor * 4 + 3); i++){ 
                 //add buttons that contain answers
@@ -218,12 +235,16 @@ function questionBuilder () {
             allContentEl.appendChild(questionHolder);
             // incrementor ++;
     }
+    //inc up once
     incrementor ++;
-        
+    
+    // clicker for right or wrong answer
     questionHolder.addEventListener("click", function(event){
         
         var rightOrWrong = event.target;
-        // debugger;
+        
+        //logic to hold whether right or wrong answers
+        //if wrong decrement by -10
         rightOrWrong = rightOrWrong.innerText;
         rightOrWrong = rightOrWrong.toLowerCase();
         if (rightOrWrong === "<script>" || 
@@ -243,6 +264,8 @@ function questionBuilder () {
     // debugger;
 }
 
-
+// start timer on start quiz click
 codeContentEl.addEventListener("click",timeGoesOn);
+
+// start code quiz
 codeContentEl.addEventListener("click", startChallenge);

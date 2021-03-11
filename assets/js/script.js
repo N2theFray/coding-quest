@@ -205,9 +205,7 @@ function questionBuilder () {
     questionHolder.id = "questionHolder"
     
     for ( let i = 0; i < 1; i++ ){
-         console.log("i" + i);
-         console.log("outer inc" + incrementor);
-         console.log("outer" + i);
+         
         //create question H1
         var questionH1 = document.createElement("h1");
         questionH1.className = "questionGoesHere";
@@ -226,7 +224,7 @@ function questionBuilder () {
             var answerBtn = document.createElement("button");
             answerBtn.className = "answers";
             answerBtn.textContent = codeAnswers[j];
-            console.log("inner j" + j);
+           
             
             //add buttons to button holder div
             buttonHolder.appendChild(answerBtn);

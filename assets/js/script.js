@@ -109,6 +109,7 @@ function highScoreLanding () {
 
 // input page hold highscore divs and input section
 function getHighScore () {
+    debugger;
     timeLeft = 0;
     document.getElementById("timer").textContent = timeLeft;
 
@@ -155,8 +156,9 @@ function timeGoesOn (){
     var downloadTimer = setInterval(function(){
     timeLeft--;
     document.getElementById("timer").textContent = timeLeft;
-    if(timeLeft <= 0)
+    if(timeLeft < 1)
         clearInterval(downloadTimer);
+        // document.getElementById("timer").textContent = "";
     },1000);
     
 }
@@ -186,6 +188,7 @@ function questionReset(){
     // debugger;
     if (incrementor === codeQuestions.length || timeLeft <=1){
         // if time or questions run out jump to high score page
+        
        getHighScore();
 
     } else { 
@@ -201,8 +204,10 @@ function questionBuilder () {
     var questionHolder = document.createElement("div");
     questionHolder.id = "questionHolder"
     
-    for ( var i = incrementor; i<= codeQuestions.length-1; i++){
-        
+    for ( let i = 0; i < 1; i++ ){
+         console.log("i" + i);
+         console.log("outer inc" + incrementor);
+         console.log("outer" + i);
         //create question H1
         var questionH1 = document.createElement("h1");
         questionH1.className = "questionGoesHere";
@@ -216,21 +221,18 @@ function questionBuilder () {
     
             // loop to add four choices
             // debugger;
-            for (var i = incrementor*4; i <= (incrementor * 4 + 3); i++){ 
+            for (let j = incrementor*4; j <= incrementor*4 + 3; j++){ 
                 //add buttons that contain answers
             var answerBtn = document.createElement("button");
             answerBtn.className = "answers";
-            answerBtn.textContent = codeAnswers[i];
+            answerBtn.textContent = codeAnswers[j];
+            console.log("inner j" + j);
             
-    
             //add buttons to button holder div
             buttonHolder.appendChild(answerBtn);
             }
-        
-    
             //add button div to section
             questionHolder.appendChild(buttonHolder);
-
             //add all content to body
             allContentEl.appendChild(questionHolder);
             // incrementor ++;
@@ -263,7 +265,7 @@ function questionBuilder () {
     });
     // debugger;
 }
-
+ 
 // start timer on start quiz click
 codeContentEl.addEventListener("click",timeGoesOn);
 
